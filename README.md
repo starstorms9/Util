@@ -1,2 +1,2 @@
 # Util
-Machine learning utilities
+Machine learning utilities collection.
