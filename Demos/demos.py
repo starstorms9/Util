@@ -27,6 +27,7 @@ early_stop = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)
 train_dataset.isna().sum()
 dataset = train_dataset.dropna()
 origin = dataset.pop('Origin')
+filtered_df_by_keyword = dataset.filter(like='loss')
 
 #%% Tensorflow / Keras
 
@@ -61,6 +62,13 @@ class DisplayCallback(tf.keras.callbacks.Callback):
   def on_epoch_end(self, epoch, logs=None):
     show_predictions()  # could use random sample or use a specific preset one
 pass
+
+#%% Plotting
+# TF has a plotter with smoothing built int, works with matplotlib plts
+plotter = tfdocs.plots.HistoryPlotter(smoothing_std=1)
+plotter.plot({'Basic': history}, metric = "mae")
+plt.ylim([0, 10])
+
 
 #%% Active plot callback
 history = dict()
